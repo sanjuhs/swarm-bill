@@ -457,7 +457,7 @@ function resize() {
   const dpr = Math.min(devicePixelRatio || 1, 2);
   cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
   const k = Math.min(r.width / WORLD.w, r.height / WORLD.h);
-  view = { k, dpr, ui: clamp(k / 0.5, 0.62, 1), w: r.width, h: r.height, ox: (r.width - WORLD.w * k) / 2, oy: (r.height - WORLD.h * k) / 2 };
+  view = { k, dpr, ui: window.swarmUi || clamp(k / 0.5, 0.62, 1), w: r.width, h: r.height, ox: (r.width - WORLD.w * k) / 2, oy: (r.height - WORLD.h * k) / 2 };
   wrapCache.clear();
   render();
 }
