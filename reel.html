@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Swarm Bill reel stage</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,800;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F4EFE4; --sheet:#FFFDF8; --ink:#1C1A17; --muted:#625B4E; --rule:rgba(70,60,40,.22); --red:#C8261B; --mono:"IBM Plex Mono",monospace; --serif:Fraunces,Georgia,serif; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; width:1080px; height:1920px; overflow:hidden; background:var(--paper); color:var(--ink); }
+  canvas { position:absolute; inset:0; width:1080px; height:1920px; }
+  #agents { z-index:3; }
+  /* Instagram covers roughly the top 210px and bottom 330px, so everything lives between them. */
+  .topline { position:absolute; left:60px; right:60px; top:196px; display:flex; justify-content:space-between; align-items:baseline; font:500 25px var(--mono); color:var(--muted); z-index:2; }
+  .topline b { font:600 34px var(--serif); color:var(--ink); }
+  .meter { position:absolute; z-index:4; left:60px; right:60px; top:1110px; height:212px; background:var(--sheet); box-shadow:0 10px 22px rgba(40,30,10,.14); padding:16px 28px; }
+  .m-label { display:flex; justify-content:space-between; font:500 25px var(--mono); color:var(--muted); }
+  .m-label .bad { color:var(--red); font-weight:600; }
+  .m-total { font:500 112px/1.12 var(--mono); color:var(--red); letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+  .m-meta { display:flex; justify-content:space-between; font:500 26px var(--mono); color:var(--muted); font-variant-numeric:tabular-nums; }
+  .caption { position:absolute; z-index:6; left:60px; right:60px; top:1344px; min-height:210px; font:600 56px/1.16 var(--serif); letter-spacing:-.01em; }
+  .caption span { opacity:.16; }
+  .caption span.said { opacity:1; }
+  .caption span.now { color:var(--red); opacity:1; }
+  .glyph-note { position:absolute; z-index:5; left:60px; right:60px; top:900px; text-align:center; font:500 32px var(--mono); color:var(--ink); opacity:0; }
+  .receipt { position:absolute; z-index:5; left:130px; width:820px; top:250px; background:var(--sheet); padding:0 44px; font-family:var(--mono); filter:drop-shadow(0 18px 30px rgba(40,30,10,.25)); overflow:hidden; height:0; }
+  .receipt .in { padding-block:36px 40px; }
+  .r-head { display:flex; justify-content:space-between; font:600 32px var(--mono); }
+  .r-sub { color:var(--muted); font-size:25px; margin:6px 0 22px; line-height:1.35; }
+  .r-row { display:flex; justify-content:space-between; align-items:baseline; font-size:31px; padding:15px 0; border-top:2px dashed var(--rule); }
+  .r-row small { display:block; font-size:22px; color:var(--muted); margin-top:2px; }
+  .r-total { display:flex; justify-content:space-between; align-items:baseline; border-top:4px solid var(--ink); margin-top:6px; padding-top:18px; font-weight:600; font-size:34px; }
+  .r-total b { font:500 128px/1 var(--mono); color:var(--red); letter-spacing:-.05em; }
+  .r-foot { color:var(--muted); font-size:22px; margin-top:16px; }
+  .end { position:absolute; z-index:5; left:60px; right:60px; top:1040px; text-align:center; opacity:0; }
+  .end .url { font:600 42px var(--mono); }
+  .end .who { font:500 italic 40px var(--serif); color:var(--muted); margin-top:12px; }
+</style>
+</head>
+<body>
+<canvas id="page"></canvas>
+<canvas id="agents"></canvas>
+<div class="topline"><b>Swarm Bill</b><span>simulated run, real prices</span></div>
+<div class="meter" id="meter">
+  <div class="m-label"><span>DeepSeek V4.1 Flash</span><span id="m-phase"></span></div>
+  <div class="m-total" id="m-total">$0.0000</div>
+  <div class="m-meta"><span id="m-tokens"></span><span id="m-active"></span></div>
+</div>
+<div class="glyph-note" id="note"></div>
+<div class="receipt" id="receipt"><div class="in" id="receipt-in">
+  <div class="r-head"><span>SWARM BILL</span><span>1 website</span></div>
+  <div class="r-sub">1,000 agents × 12 turns<br>DeepSeek V4.1 Flash, off-peak</div>
+  <div class="r-row"><span>Cached input<small>204M × $0.003 per 1M</small></span><span>$0.61</span></div>
+  <div class="r-row"><span>Fresh input<small>36M × $0.15 per 1M</small></span><span>$5.40</span></div>
+  <div class="r-row"><span>Output<small>7.2M × $0.60 per 1M</small></span><span>$4.32</span></div>
+  <div class="r-total"><span>TOTAL</span><b>$10.33</b></div>
+  <div class="r-foot">247.2M tokens. Modelled estimate, not a real run.</div>
+</div></div>
+<div class="end" id="end"><div class="url">sanjuhs.github.io/swarm-bill</div><div class="who">Sanjay Builds Tech</div></div>
+<div class="caption" id="caption"></div>
+<script type="module" src="js/reel.js"></script>
+</body>
+</html>

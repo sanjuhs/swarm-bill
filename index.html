@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swarm Bill: what does a thousand-agent swarm cost?</title>
+<meta name="description" content="Watch a simulated swarm of AI agents build a website while the receipt prints, then run the numbers with real DeepSeek prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,800;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <canvas id="page-canvas" class="layer" aria-hidden="true"></canvas>
+  <canvas id="agent-canvas" class="layer agents" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <header class="top">
+      <span class="brand"><svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true"><path d="M21 9 1 1l4.5 8z" fill="#1C1A17"/><path d="M21 9 1 17l4.5-8z" fill="#1C1A17" opacity=".7"/></svg>Swarm Bill</span>
+      <a href="https://sanjuhs.github.io/">Sanjay Builds Tech</a>
+    </header>
+    <div class="stage-grid">
+      <div class="copy">
+    <h1 id="headline"><span id="h-agents">1,000 agents.</span><br>One website.<br><em id="h-cost">$10.33.</em></h1>
+    <p class="lede">A swarm is many AI agents working one job at the same time. Watch one build a site while the receipt prints. The swarm is simulated. The prices are DeepSeek's real rates.</p>
+      </div>
+      <div id="stage" class="stage"></div>
+      <div class="side">
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Number of agents">
+            <button data-n="12">12</button><button data-n="100">100</button><button data-n="1000" class="on">1,000</button><button data-n="5000">5,000</button>
+          </div>
+          <button id="replay" class="ghost">Replay</button>
+        </div>
+        <aside class="receipt" aria-live="off">
+          <div class="r-head"><span>Swarm Bill</span><span id="r-status" class="status">waiting</span></div>
+          <div class="r-model" id="r-model">DeepSeek V4.1 Flash, off-peak</div>
+          <div class="r-total" id="r-total">$0.0000</div>
+          <div class="r-meta"><span id="r-tokens">0 tokens</span><span id="r-active">0 / 1,000 active</span></div>
+          <div class="r-rows">
+            <div><span>Cached input</span><b id="r-hit">$0.0000</b></div>
+            <div><span>Fresh input</span><b id="r-miss">$0.0000</b></div>
+            <div><span>Output</span><b id="r-out">$0.0000</b></div>
+          </div>
+          <div class="r-foot">Modelled estimate. <a href="#numbers">Change the assumptions</a></div>
+        </aside>
+        <ul class="legend" aria-label="Agent roles">
+          <li><i style="background:#2463D1"></i>Research</li>
+          <li><i style="background:#7A3FD1"></i>Design</li>
+          <li><i style="background:#D97F00"></i>Write</li>
+          <li><i style="background:#0B8F65"></i>Code</li>
+          <li><i style="background:#D62E78"></i>Review</li>
+          <li><i style="background:#1C1A17"></i>Deploy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap band">
+  <h2>A swarm has two moves.</h2>
+  <div class="two">
+    <figure>
+      <canvas id="demo-fan" width="560" height="300" aria-label="Agents leave one point, split across six tasks and merge back"></canvas>
+      <figcaption><b>Fan out.</b> Split the job into pieces that don't touch each other. Research, design, code and review run at once, then the results merge.</figcaption>
+    </figure>
+    <figure>
+      <canvas id="demo-ring" width="560" height="300" aria-label="Every agent closes in on one red target"></canvas>
+      <figcaption><b>Converge.</b> Point everyone at one hard thing. Each agent tries a different theory on the same bug, and the one that holds up wins.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap band">
+  <h2>This is already happening.</h2>
+  <p class="section-lede">Not everyone calls it a swarm. Most of these products say "agents". The shape is the same: many workers, one goal.</p>
+  <div class="real">
+    <a href="https://www.kimi.com/help/agent/agent-swarm"><h3>Kimi Agent Swarm</h3><p>Runs up to 300 sub-agents at once, with more than 4,000 tool calls in a single task.</p><span>General work</span></a>
+    <a href="https://www.utilitydive.com/press-release/20260315-halcyon-raises-21-million-series-a-to-bring-ai-powered-intelligence-to-the/"><h3>Halcyon</h3><p>Searches thousands of energy filings and offers agentic alerts, covering all 50 US state utility commissions, every ISO and RTO, and FERC.</p><span>Energy</span></a>
+    <a href="https://www.clay.com/claygent"><h3>Clay</h3><p>Its Claygent research agent runs the same prompt across every account in a sales table.</p><span>Go-to-market</span></a>
+    <a href="https://www.cpapracticeadvisor.com/2026/06/03/ramp-launches-ai-operating-system-for-accounting-firms/184415/"><h3>Ramp Stack</h3><p>An AI operating system for accounting firms that automates the work of the monthly close.</p><span>Accounting</span></a>
+    <a href="https://code.claude.com/docs/en/agent-teams"><h3>Claude Code agent teams</h3><p>An experimental mode where a lead session coordinates teammates, for example to test competing theories about one bug.</p><span>Software</span></a>
+  </div>
+</section>
+
+<section class="wrap band" id="numbers">
+  <h2>Run your own numbers.</h2>
+  <p class="section-lede">Agents &times; turns &times; tokens &times; price. Every assumption is yours to change.</p>
+  <div class="calc">
+    <form id="calc" class="sliders">
+      <label><span>Agents <output id="o-agents"></output></span><input id="s-agents" type="range" min="0" max="100" step="1"></label>
+      <label><span>Turns per agent <output id="o-turns"></output></span><input id="s-turns" type="range" min="1" max="60" step="1"></label>
+      <label><span>Context per turn <output id="o-ctx"></output></span><input id="s-ctx" type="range" min="2000" max="100000" step="1000"></label>
+      <label><span>Input served from cache <output id="o-hit"></output></span><input id="s-hit" type="range" min="0" max="98" step="1"></label>
+      <label><span>Output per turn <output id="o-out"></output></span><input id="s-out" type="range" min="100" max="5000" step="100"></label>
+      <div class="toggles">
+        <div class="seg" role="group" aria-label="Model">
+          <button type="button" data-model="flash" class="on">V4.1 Flash</button><button type="button" data-model="pro">V4 Pro</button>
+        </div>
+        <div class="seg" role="group" aria-label="Time of day">
+          <button type="button" data-peak="0" class="on">Off-peak</button><button type="button" data-peak="1">Peak</button>
+        </div>
+      </div>
+    </form>
+    <div class="calc-out">
+      <div class="big" id="c-total">$10.33</div>
+      <div class="big-sub" id="c-sub"></div>
+      <table class="tbl">
+        <thead><tr><th>Tokens</th><th class="n">Amount</th><th class="n">Per 1M</th><th class="n">Cost</th></tr></thead>
+        <tbody id="c-rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="chart-title">The same swarm, four ways</h3>
+  <div class="bars" id="bars"></div>
+  <div class="tip" id="tip" hidden></div>
+</section>
+
+<section class="wrap band">
+  <h2>What this bill leaves out.</h2>
+  <div class="caveats">
+    <div><h3>A thousand agents on one site is a stunt.</h3><p>Anthropic's docs suggest starting agent teams with 3 to 5 teammates, and warn that two teammates editing the same file overwrite each other.</p></div>
+    <div><h3>Concurrency is capped.</h3><p>DeepSeek lists a concurrency limit of 2,500 for Flash. A thousand agents fit. Five thousand would have to queue.</p></div>
+    <div><h3>Thinking costs tokens.</h3><p>Thinking mode is on by default, so real output can run well past 600 tokens a turn. Push the slider and see.</p></div>
+    <div><h3>Someone still has to check it.</h3><p>Tokens are the cheap part. Reviewing what a thousand agents produced is not on this receipt.</p></div>
+  </div>
+</section>
+
+<footer class="wrap foot">
+  <p>Prices from <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek's pricing page</a>, checked 5 November 2026. They can change.</p>
+  <p>Idea inspired by <a href="https://califa.github.io/swarm-site/">Swarm by califa</a>. This page is written from scratch.</p>
+  <p>Made by <a href="https://github.com/sanjuhs">Sanjay</a>. <a href="https://github.com/sanjuhs/swarm-bill">Source on GitHub</a>.</p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
