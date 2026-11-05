@@ -78,7 +78,7 @@ async function boot() {
     pageCanvas: $('page'), agentCanvas: $('agents'),
     width: 1080, height: 1920, dpr: 1,
     pageRect: { x: 60, y: 256, w: 960 },
-    N: DEFAULTS.agents, beats: BEATS, scale: 1.25, dims: [[BEATS.bill, BEATS.billEnd]],
+    N: DEFAULTS.agents, beats: BEATS, scale: 1.25, dims: [[BEATS.bill, BEATS.billEnd]], clearAt: 25.9,
     glyphs: GLYPHS.map((g) => ({ ...g, box: g.text === '?' ? { x: 200, y: 280, w: 680, h: 720 } : glyphBox })),
   });
   window.renderAt(0);

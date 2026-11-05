@@ -379,7 +379,7 @@ export class Scene {
         tx = R.x + R.w * (0.3 + 0.4 * u) + this.gx[i] * 10 * s; ty = R.y + 17 * s + this.gy[i] * 5 * s;
       } else if (rest) {
         const a = this.p2[i] + T * 0.18 * this.spd[i];
-        const rx = R.w * (0.53 + 0.08 * u), ry = R.h * (0.5 + 0.06 * v);
+        const rx = R.w * (0.53 + 0.08 * u), ry = R.h * (0.455 + 0.04 * v);
         tx = R.x + R.w / 2 + Math.cos(a) * rx; ty = R.y + R.h / 2 + Math.sin(a) * ry;
       } else {
         let task = null;
@@ -533,7 +533,8 @@ export class Scene {
     let dim = 0;
     for (const g of this.glyphs) dim = Math.max(dim, ease(prog(t, g.t0 - 0.1, g.t0 + 0.35)) * (1 - ease(prog(t, g.t1 - 0.05, g.t1 + 0.3))));
     for (const [a, b] of this.dims || []) dim = Math.max(dim, ease(prog(t, a, a + 0.4)) * (1 - ease(prog(t, b - 0.2, b + 0.1))));
-    if (dim > 0) { c.fillStyle = `rgba(244,239,228,${0.96 * dim})`; c.fillRect(R.x - 12, R.y - 12, R.w + 24, R.h + 24); }
+    const clear = this.clearAt ? ease(prog(t, this.clearAt, this.clearAt + 0.6)) : 0;
+    if (dim > 0 || clear > 0) { c.fillStyle = `rgba(244,239,228,${Math.max(0.96 * dim, clear)})`; c.fillRect(R.x - 50, R.y - 50, R.w + 100, R.h + 100); }
   }
 
   drawAgents() {
