@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swarm: watch agents build a website</title>
+<meta name="description" content="A team of simulated AI agents builds a website in a shared design tool: drawing boxes, copying each other's work and rewriting it. Choose the team size.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="swarm.css">
+</head>
+<body>
+<div class="app">
+  <header class="bar">
+    <a class="brand" href="./"><svg width="20" height="16" viewBox="0 0 22 18" aria-hidden="true"><path d="M21 9 1 1l4.5 8z" fill="currentColor"/><path d="M21 9 1 17l4.5-8z" fill="currentColor" opacity=".7"/></svg>Swarm</a>
+    <div class="team">
+      <span class="lbl" id="team-lbl">Agents</span>
+      <div class="seg" id="counts" role="group" aria-labelledby="team-lbl">
+        <button data-n="1">1</button><button data-n="3">3</button><button data-n="6">6</button><button data-n="12" class="on">12</button><button data-n="24">24</button><button data-n="48">48</button>
+      </div>
+    </div>
+    <dl class="stats">
+      <div><dt>Time</dt><dd id="s-time">0:00</dd></div>
+      <div><dt>Tasks</dt><dd id="s-tasks">0 / 0</dd></div>
+      <div><dt>Tokens</dt><dd id="s-tokens">0</dd></div>
+      <div><dt>Bill</dt><dd id="s-cost" class="cost">$0.0000</dd></div>
+    </dl>
+    <a class="out" href="../">Swarm Bill</a>
+  </header>
+
+  <aside class="panel">
+    <div class="p-sec roster-sec">
+      <h2>The team <small id="team-hint">Click one to follow it</small></h2>
+      <ol id="roster" class="roster"></ol>
+    </div>
+    <div class="p-sec log-sec">
+      <h2 id="log-title">Activity</h2>
+      <ol id="log" class="log"></ol>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage">
+    <canvas id="cv" aria-label="Agents working on a shared canvas, building a website for a made-up kite shop"></canvas>
+  </main>
+
+  <div class="scrub">
+    <button id="play" aria-label="Pause">Pause</button>
+    <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Scrub through the build">
+    <div class="seg small" id="speeds" role="group" aria-label="Playback speed">
+      <button data-s="1" class="on">1×</button><button data-s="2">2×</button><button data-s="4">4×</button>
+    </div>
+  </div>
+</div>
+
+<section class="below">
+  <div class="inner">
+    <h2>What you're watching</h2>
+    <div class="notes">
+      <div><h3>One agent, one job</h3><p>Each agent has a speciality and takes the next task whose prerequisites are finished. Nobody edits the same box at the same moment.</p></div>
+      <div><h3>Copy, then rewrite</h3><p>The second and third product cards start as copies of the first. One agent pastes, another rewrites the name and price, and another changes the colours.</p></div>
+      <div><h3>Notes come back</h3><p>The reviewer leaves comments on the canvas. Whoever does that kind of work picks up the note, fixes it and closes it.</p></div>
+    </div>
+
+    <h2 class="chart-h">More agents stop helping</h2>
+    <p class="muted" id="chart-note"></p>
+    <div class="bars" id="bars"></div>
+    <div class="tip" id="tip" hidden></div>
+
+    <p class="fine">This is a simulation. No model is running: a scheduler assigns the tasks and every click is scripted. The bill is a modelled estimate of 3 turns per task on <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek V4.1 Flash</a> at off-peak prices, using the same assumptions as <a href="../">Swarm Bill</a>. Paper Kite Co. is made up.</p>
+    <p class="fine">Made by <a href="https://github.com/sanjuhs">Sanjay</a>. <a href="https://github.com/sanjuhs/swarm-bill">Source on GitHub</a>.</p>
+  </div>
+</section>
+<script type="module" src="app.js"></script>
+</body>
+</html>

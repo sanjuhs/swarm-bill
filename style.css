@@ -24,6 +24,8 @@ h3 { font-size: 20px; line-height: 1.25; }
 .agents { z-index: 3; }
 .hero-inner { position: relative; }
 .top { display: flex; justify-content: space-between; align-items: center; padding-block: 24px; font-size: 15px; }
+.top-links { display: flex; gap: 20px; }
+.top-links a:first-child { color: var(--ink); font-weight: 600; }
 .top a { text-decoration: none; color: var(--muted); }
 .top a:hover { color: var(--ink); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font: 600 19px var(--serif); }
